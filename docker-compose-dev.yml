@@ -53,7 +53,15 @@ services:
       EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT}
       EMAIL_SMTP_USER: ${EMAIL_SMTP_USER}
       EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD}
-
+ nginx:
+    image: nginx:latest
+    depends_on:
+      - directus
+    ports:
+      - "80:80" # Expose NGINX to the host
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+    restart: always
 
 #sudo docker compose -f docker-compose-dev.yml up
 #sudo docker system prune --all --volumes
